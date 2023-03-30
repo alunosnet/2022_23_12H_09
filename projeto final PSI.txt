@@ -1,0 +1,8 @@
+Tema:
+	Carregadores elétricos
+
+Tabelas:
+	Localidades (viseu, aveiro,...), 
+	Empresa e carregador (a que empresa pretence o carregador, se está a ser utilizado, coordenadas (maybe usar google maps)),
+	cliente (info sobre ele),
+	carregamento (quanta eletricidade utilizou, quanto tem de pagar)

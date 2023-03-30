@@ -1,0 +1,36 @@
+create table Empresas(
+	nome varchar(40) primary key,
+
+	check ((trim(nome) != "") and (nome is not null))
+);
+
+create table Carregadores(
+	nCarregador int identity primary key,
+	localidade varchar(20),
+	empresa foreign key references Empresas(nome),
+	estado bit default 0, --em utilização,
+	preco_por_kWh decimal(4,2),
+	latitude varchar(10),
+	longitude varchar(10),
+
+	check (preco_por_kWh > 0)	
+);
+
+create table Clientes(
+	nif varchar(9) primary key,
+	nome varchar(40),
+
+	check ((trim(nome) like '% %') and (len(trim(nome))>4))
+);
+
+create table Carregamento(
+	nCarregamento int identity primary key,
+	nCarregador foreign key references Carregadores(nCarregador),
+	cliente foreign key references Clientes(nif),
+	data_carregamento date,
+	kWh decimal(5,2),
+	precoTotal decimal(7,2),
+
+	check (kWh > 0),
+	check (precoTotal > 0)
+);
