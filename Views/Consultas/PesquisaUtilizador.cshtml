@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Trabalho_Final_MOD_17E.Models.User>
+
+@{
+    ViewBag.Title = "Pesquisa Utilizador";
+}
+
+<h2>Pesquisa Utilizador</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.perfil)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.perfil)
+        </td>
+    </tr>
+}
+
+</table>

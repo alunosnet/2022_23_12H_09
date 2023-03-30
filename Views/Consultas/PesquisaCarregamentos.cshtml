@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Pesquisa Carregamentos";
+}
+
+<h2>Pesquisa Carregamentos</h2>
+
+<form method="post" id="formPesquisa">
+    Pesquisar por:
+    <select name="pesquisa" id="pesquisa">
+        <option value="1">CarregamentoID</option>
+        <option value="2">UtilizadorID</option>
+        <option value="3">CarregadorID</option>
+        <option value="4">preco_total</option>
+    </select>
+
+    <input type="text" name="nome" id="nome" class="form-control" />
+    <input type="submit" value="Pesquisar" class="btn-default" />
+</form>
+<br />
+<div id="divUtilizadores"></div>
+
+<script>
+    window.onload = function () {
+        $("#formPesquisa").submit(function (event) {
+            console.log("submit");
+            carregarDados();
+            event.preventDefault();
+        });
+        $("#nome").on('input', function () {
+            console.log("input");
+            carregarDados();
+        });
+    }
+
+    function carregarDados()
+    {
+        $("#divUtilizadores").empty();
+        if ($("#nome").val == "" || $("#nome").val() == undefined) return;
+        if ($("#pesquisa").val == "" || $("#pesquisa").val() == undefined) return;
+        console.log({ nome: $("#nome").val(), p: $("#pesquisa").val() });
+        $.ajax
+        (
+            {
+                type: "GET",
+                url: "PesquisaCarregamento",
+                data: { nome: $("#nome").val(), p: $("#pesquisa").val() },
+                //data: "nome=" + $("#nome").val() & "pesquisa=" + $("#pesquisa").val(),
+                success: function (dados)
+                {
+                    $("#divUtilizadores").empty();
+                    $("#divUtilizadores").append("<b>ID do carregamento | ID do utilizador | ID do carregador | Preço total</b>")
+                    $("#divUtilizadores").append("<br><br>")
+                    for (let i = 0; i < dados.length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            $("#divUtilizadores").append("<hr style='border: 1px solid black;'>")
+                        }
+                        $("#divUtilizadores").append("<p>" +
+                            dados[i].CarregamentoID + " | " +
+                            dados[i].UtilizadorID + " | " +
+                            dados[i].CarregadorID + " | " +
+                            dados[i].preco_total + "€" +
+                            "</p>")
+                    }
+                },
+                error: function (dados)
+                {
+                    console.log(dados);
+                }
+            }
+        );
+    }
+</script>
+

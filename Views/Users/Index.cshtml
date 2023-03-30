@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Trabalho_Final_MOD_17E.Models.User>
+
+@{
+    ViewBag.Title = "Utilizadores";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Criar Novo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.perfil)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img src="@Url.Content(String.Format("~/Fotos/{0}.jpg", item.UserID))" width="150" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.perfil)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.UserID }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.UserID }) |
+            @Html.ActionLink("Apagar", "Delete", new { id=item.UserID })
+        </td>
+    </tr>
+}
+
+</table>

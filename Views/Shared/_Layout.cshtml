@@ -1,0 +1,93 @@
+﻿@using Trabalho_Final_MOD_17E.Helper
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Carregadores</title>
+    @*@Styles.Render("~/Content/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+    @*@Scripts.Render("~/Content/Superhero.css")*@
+    <link rel="stylesheet" href="~/Content/Superhero.css" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Carregadores Online", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
+                    @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+
+
+                    <li style="padding-left:100px; margin-left:100px">
+                        @if (Request.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Administrador"))
+                            {
+                                <li>@Html.ActionLink("Utilizadores", "Index", "Users")</li>
+                            }
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    @Html.DisplayName("Consultas ▼")
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @if (User.IsInRole("Administrador"))
+                                    {
+                                        <li>@Html.ActionLink("Melhor Utilizador", "MelhorUtilizador", "Consultas")</li>
+                                        <li>@Html.ActionLink("Consultar utilizadores", "PesquisaDinamica", "Consultas")</li>
+                                        <li>@Html.ActionLink("Consultar carregamentos", "PesquisaCarregamentos", "Consultas")</li>
+                                    }
+                                    <li>@Html.ActionLink("Consultar carregadroes", "PesquisaCarregadores", "Consultas")</li>
+                                </ul>
+                            </li>
+
+
+
+
+
+
+                            <li>@Html.ActionLink("Carregadores", "Index", "Carregadores")</li>
+                            <li>@Html.ActionLink("Carregamentos", "Index", "Carregamentoes")</li>
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    @Html.DisplayName("Olá " + Html.UserName(User) + " ▼")
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Editar Perfil", "Edit/" + @Html.UserId(User), "Users")</li>
+                                    <li>@Html.ActionLink("Terminar sessão", "Index", "Logout")</li>
+                                </ul>
+                            </li>
+                        }
+
+                        else
+                        {
+                            <li>@Html.ActionLink("Login", "Index", "Login")</li>
+                        }
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" style="padding-top: 2%;">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Carregadores Online</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

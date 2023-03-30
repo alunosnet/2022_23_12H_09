@@ -1,0 +1,61 @@
+﻿@model Trabalho_Final_MOD_17E.Models.User
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Utilizador</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.perfil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.perfil)
+        </dd>
+
+    </dl>
+    <hr />
+    <h2>Lista de estadias</h2>
+    <table class="table">
+        <tr>
+            <th>ID Carregamento</th>
+            <th>Data do carregamento</th>
+            <th>kWh carregados</th>
+            <th>Preço total</th>
+        </tr>
+        @foreach (var carregamento in Model.listaCarregamentos)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => carregamento.CarregamentoID)</td>
+                <td>@Html.DisplayFor(modelItem => carregamento.data_carregamento)</td>
+                <td>@Html.DisplayFor(modelItem => carregamento.kWh)</td>
+                <td>@Html.DisplayFor(modelItem => carregamento.preco_total)</td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.UserID }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

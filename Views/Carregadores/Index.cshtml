@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Trabalho_Final_MOD_17E.Models.Carregador>
+
+@{
+    ViewBag.Title = "Carregadores";
+}
+
+<h2>Index</h2>
+
+<p>
+    @if (Request.IsAuthenticated && User.IsInRole("Administrador"))
+            {
+                @Html.ActionLink("Novo Carregador", "Create")
+            }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Localidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Empresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Preco_por_kWh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Localidade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Empresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Preco_por_kWh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </td>
+        <td>
+            @Html.ActionLink("Detalhes", "Details", new { id = item.CarregadorID })
+            @if (Request.IsAuthenticated && User.IsInRole("Administrador"))
+            {
+                @("|")
+                @Html.ActionLink("Editar", "Edit", new { id = item.CarregadorID }) <span>|</span>
+                @Html.ActionLink("Apagar", "Delete", new { id = item.CarregadorID })
+            }
+        </td>
+    </tr>
+}
+
+</table>

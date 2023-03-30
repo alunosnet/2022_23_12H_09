@@ -1,0 +1,64 @@
+﻿@model Trabalho_Final_MOD_17E.Models.Carregamento
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Carregamento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.carregador.Localidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.carregador.Localidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_carregamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_carregamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.kWh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kWh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.preco_total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.preco_total)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

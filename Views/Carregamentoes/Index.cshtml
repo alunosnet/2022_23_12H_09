@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Trabalho_Final_MOD_17E.Models.Carregamento>
+
+@{
+    ViewBag.Title = "Carregamentos";
+}
+
+<h2>Index</h2>
+
+<p>
+    @if (Request.IsAuthenticated && User.IsInRole("Administrador"))
+            {
+                @Html.ActionLink("Novo carregamento", "Create")
+            }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.carregador.CarregadorID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.carregador.Localidade)
+        </th>
+        <th>
+            <span>
+                |
+            </span>
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.user.nome)*@
+            Nome
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.data_carregamento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.kWh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.preco_total)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.carregador.CarregadorID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.carregador.Localidade)
+    </td>
+    <td>
+        <span>
+            |
+        </span>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.user.nome)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.data_carregamento)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.kWh)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.preco_total)
+    </td>
+    <td>
+
+        @if (Request.IsAuthenticated && User.IsInRole("Administrador"))
+        {
+            @Html.ActionLink("Editar", "Edit", new { id = item.CarregamentoID }) <span>|</span>
+            @Html.ActionLink("Detalhes", "Details", new { id = item.CarregamentoID })
+        }
+    </td>
+</tr>
+}
+
+</table>

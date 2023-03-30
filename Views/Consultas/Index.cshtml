@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Consultar Utilizadores";
+}
+
+<h2>Consultar Utilizadores</h2>
+
+<form method="post">
+
+    <label for="pesquisa">Pesquisar por:</label>
+    <select name="pesquisa" id="pesquisa">
+        <option value="1">Nome</option>
+        <option value="2">Email</option>
+        <option value="3">Perfil</option>
+    </select>
+
+    <input type="text" name="nome" class="form-control" />
+    <input type="submit" value="Pesquisar" class="btn-default" />
+</form>

@@ -1,0 +1,66 @@
+﻿@model Trabalho_Final_MOD_17E.Models.Carregamento
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Carregamento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.carregador.CarregadorID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.carregador.CarregadorID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.carregador.Localidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.carregador.Localidade)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.user.nome)*@
+            Nome
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_carregamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_carregamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.kWh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kWh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.preco_total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.preco_total)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CarregamentoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
