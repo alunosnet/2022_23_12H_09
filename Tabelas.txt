@@ -1,0 +1,56 @@
+﻿create table Utilizadores(
+	id int identity primary key,
+	nif varchar(9),
+	nome varchar(40),
+	email varchar(40),
+	palavra_passe varchar(40),
+	sal int,
+	estado int not null, --conta ainda em utilização
+	perfil int not null check (perfil in ('0','1','2')), --tipo de utilizador
+	lnkRecuperar varchar(36),
+	data_lnk date,
+
+	check ((LTRIM(RTRIM(nome)) like '% %') and (len(LTRIM(RTRIM(nome)))>4))
+);
+
+create table Carregadores(
+	nCarregador int identity primary key,
+	localidade varchar(20),
+	empresa int foreign key references Utilizadores(id),
+	utilizacao bit default 0, --está em utilização?
+	preco_por_kWh decimal(4,2),
+	latitude varchar(10),
+	longitude varchar(10),
+
+	check (preco_por_kWh > 0)	
+);
+
+create table Carregamento(
+	nCarregamento int identity primary key,
+	nCarregador int foreign key references Carregadores(nCarregador),
+	cliente int foreign key references Utilizadores(id),
+	data_carregamento date,
+	kWh decimal(5,2),
+	precoTotal decimal(7,2),
+
+	check (kWh > 0),
+	check (precoTotal > 0),
+);
+
+create trigger Carregamento_precoTotal
+on Carregamento
+for insert
+as
+begin
+	DECLARE
+	@preco_kWh decimal(4,2),
+	@kWh_total decimal(5,2),
+	@total decimal(7,2)
+
+	select @preco_kWh = Carregadores.preco_por_kWh from Carregamento inner join Carregadores on Carregadores.nCarregador = Carregamento.nCarregador
+	select @kWh_total = kWh from Carregamento
+
+	set @total = @preco_kWh * @kWh_total
+
+	update Carregamento set precoTotal = @total 
+end
